@@ -52,29 +52,11 @@ func defaultOptions(args []string) (json.RawMessage, string, cmn.HexBytes, error
 }
 
 func generateApp(rootDir string, logger log.Logger) (abci.Application, error) {
-	dbMain, err := dbm.NewGoLevelDB("democoin", filepath.Join(rootDir, "data"))
+	db, err := dbm.NewGoLevelDB("democoin", filepath.Join(rootDir, "data"))
 	if err != nil {
 		return nil, err
 	}
-	dbAcc, err := dbm.NewGoLevelDB("democoin-acc", filepath.Join(rootDir, "data"))
-	if err != nil {
-		return nil, err
-	}
-	dbIBC, err := dbm.NewGoLevelDB("democoin-ibc", filepath.Join(rootDir, "data"))
-	if err != nil {
-		return nil, err
-	}
-	dbStaking, err := dbm.NewGoLevelDB("democoin-staking", filepath.Join(rootDir, "data"))
-	if err != nil {
-		return nil, err
-	}
-	dbs := map[string]dbm.DB{
-		"main":    dbMain,
-		"acc":     dbAcc,
-		"ibc":     dbIBC,
-		"staking": dbStaking,
-	}
-	bapp := app.NewDemocoinApp(logger, dbs)
+	bapp := app.NewDemocoinApp(logger, db)
 	return bapp, nil
 }
 
