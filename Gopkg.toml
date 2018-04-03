@@ -73,8 +73,8 @@
   version = "~0.17.1"
   name = "github.com/tendermint/tendermint"
 
-[[constraint]]
-  version = "~0.7.1"
+[[override]]
+  revision = "d289c9286e816a37336289a75752752a751bc918"
   name = "github.com/tendermint/tmlibs"
 
 [prune]
