@@ -73,7 +73,7 @@ func NewDemocoinApp(logger log.Logger, db dbm.DB) *DemocoinApp {
 	// initialize BaseApp
 	app.SetTxDecoder(app.txDecoder)
 	app.SetInitChainer(app.initChainerFn(coolKeeper))
-	app.MountStoresIAVL(app.capKeyMainStore, app.capKeyIBCStore, app.capKeyStakingStore)
+	app.MountStoresIAVL(app.capKeyMainStore, app.capKeyAccountStore, app.capKeyIBCStore, app.capKeyStakingStore)
 	app.SetAnteHandler(auth.NewAnteHandler(app.accountMapper))
 	err := app.LoadLatestVersion(app.capKeyMainStore)
 	if err != nil {
